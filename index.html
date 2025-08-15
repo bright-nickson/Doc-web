@@ -1,0 +1,3450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Ametepe Worlarli- Digital Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --dark: #0f0f23;
+            --darker: #0a0a1a;
+            --card: rgba(255, 255, 255, 0.03);
+            --card-hover: rgba(255, 255, 255, 0.08);
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --text-faded: #64748b;
+            --border: rgba(255, 255, 255, 0.1);
+            --glow: 0 0 20px rgba(99, 102, 241, 0.3);
+            --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.7;
+            scroll-behavior: smooth;
+        }
+
+        /* Enhanced Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 40% 60%, rgba(6, 182, 212, 0.1) 0%, transparent 40%),
+                linear-gradient(135deg, var(--dark) 0%, var(--darker) 50%, var(--dark) 100%);
+            animation: bgShift 20s ease-in-out infinite;
+        }
+
+        .floating-orbs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            filter: blur(3px);
+            opacity: 0.1;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .orb:nth-child(1) { width: 100px; height: 100px; top: 20%; left: 10%; animation-delay: 0s; }
+        .orb:nth-child(2) { width: 60px; height: 60px; top: 60%; right: 20%; animation-delay: -5s; }
+        .orb:nth-child(3) { width: 80px; height: 80px; bottom: 30%; left: 70%; animation-delay: -10s; }
+        .orb:nth-child(4) { width: 120px; height: 120px; top: 80%; right: 10%; animation-delay: -7s; }
+
+        @keyframes bgShift {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(30deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-30px) rotate(120deg); }
+            66% { transform: translateY(20px) rotate(240deg); }
+        }
+
+        /* Glass Morphism Components */
+        .glass {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .glass-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-hover:hover {
+            background: var(--card-hover);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow), var(--glow);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        /* Enhanced Navigation with Mobile Menu */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            background: rgba(15, 15, 35, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav.scrolled {
+            background: rgba(15, 15, 35, 0.95);
+            padding: 1rem 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 2px;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-links a:hover::before {
+            opacity: 0.1;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Navigation */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            background: var(--card);
+            color: var(--accent);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 15, 35, 0.98);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border);
+            padding: 2rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(-100%);
+            z-index: 999;
+        }
+
+        .mobile-menu.open {
+            display: block;
+            animation: slideDown 0.3s ease forwards;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 1rem;
+        }
+
+        .mobile-nav-links a {
+            display: block;
+            color: var(--text);
+            text-decoration: none;
+            padding: 1rem;
+            border-radius: 12px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .mobile-nav-links a:hover {
+            background: var(--card-hover);
+            color: var(--accent);
+            transform: translateX(10px);
+        }
+
+        .mobile-auth {
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .auth-section {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Hero Section - Enhanced with Bold Lecturer Info */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, 
+                rgba(15, 15, 35, 0.9) 0%, 
+                rgba(99, 102, 241, 0.05) 50%, 
+                rgba(15, 15, 35, 0.9) 100%);
+        }
+
+        .hero-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: particle-float 20s infinite linear;
+            opacity: 0.3;
+        }
+
+        @keyframes particle-float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+  
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+            color: var(--accent);
+        }
+
+        .hero h1 {
+            font-size: clamp(1.5rem, 4vw, 3em);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent) 50%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out 0.4s both;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text);
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            color: var(--text-muted);
+            animation: fadeInUp 1s ease-out 0.8s both;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Enhanced Lecturer Preview - BOLD and PROMINENT */
+        .lecturer-preview {
+            background: var(--card);
+            border: 2px solid var(--primary);
+            border-radius: 24px;
+            padding: 3rem;
+            margin: 3rem auto;
+            max-width: 700px;
+            backdrop-filter: blur(20px);
+            animation: fadeInUp 1s ease-out 1s both;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--glow), var(--shadow);
+        }
+
+        .lecturer-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.2), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { left: -100%; }
+            50% { left: 100%; }
+        }
+
+        .lecturer-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 2rem;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.4);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .lecturer-details {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .lecturer-name {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: var(--text);
+            background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .lecturer-title {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .lecturer-specialization {
+            color: var(--text);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            font-weight: 500;
+            background: rgba(99, 102, 241, 0.05);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border-left: 4px solid var(--accent);
+            margin-top: 1.5rem;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 1.2s both;
+        }
+
+        .cta-primary, .cta-secondary {
+            padding: 1rem 2.5rem;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--border);
+        }
+
+        /* Hide customize button for non-authenticated users */
+        .cta-secondary.lecturer-only {
+            display: none;
+        }
+
+        .cta-secondary.lecturer-only.authenticated {
+            display: inline-flex;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.4);
+        }
+
+        .cta-secondary:hover {
+            background: var(--card);
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        /* Scroll Down Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Enhanced Sections */
+        .section {
+            padding: 8rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .section-description {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Enhanced About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .profile-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, var(--primary), transparent);
+            animation: rotate 8s linear infinite;
+            opacity: 0.1;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin: 0 auto 2rem;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
+        }
+
+        .about-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .expertise-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+
+        .expertise-tag {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            color: var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .expertise-tag:hover {
+            background: rgba(99, 102, 241, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Enhanced Stats */
+        .stats-container {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            backdrop-filter: blur(20px);
+            margin: 4rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .stat-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 25px 50px rgba(99, 102, 241, 0.15);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        /* Modal Enhancements */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: var(--card);
+            margin: 5% auto;
+            padding: 3rem;
+            border-radius: 24px;
+            width: 90%;
+            max-width: 500px;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(20px);
+            position: relative;
+            animation: slideUp 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error);
+        }
+
+        /* Enhanced Upload Areas - PRIVATE ACCESS ONLY */
+        .upload-controls {
+            display: none;
+            margin: 3rem 0;
+        }
+
+        .upload-controls.authenticated {
+            display: block;
+        }
+
+        .upload-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--border);
+            border-radius: 20px;
+            padding: 4rem 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            background: var(--card);
+        }
+
+        .upload-area::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: conic-gradient(from 0deg, var(--primary), var(--secondary), var(--accent), var(--primary));
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .upload-area:hover::before {
+            opacity: 0.3;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.05);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+        }
+
+        .upload-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .upload-area h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .upload-area p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Enhanced Content Cards */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .content-item {
+            background: var(--card);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .content-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow), var(--glow);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .content-item img,
+        .content-item video {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .content-item:hover img,
+        .content-item:hover video {
+            transform: scale(1.05);
+        }
+
+        .content-info {
+            padding: 2rem;
+        }
+
+        .content-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .content-info p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .content-date {
+            color: var(--text-faded);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .delete-btn {
+            background: linear-gradient(135deg, var(--error), #dc2626);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 500;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .content-item:hover .delete-btn {
+            opacity: 1;
+        }
+
+        .delete-btn:hover {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            transform: scale(1.05);
+        }
+
+        /* Enhanced Text Editor */
+        .text-editor {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+        }
+
+        .text-editor h3 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .editor-toolbar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .editor-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 10px;
+            color: var(--accent);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .editor-btn:hover {
+            background: rgba(99, 102, 241, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .text-input, .textarea-input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 1rem;
+            line-height: 1.6;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .textarea-input {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .text-input:focus, .textarea-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Enhanced Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 4rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 2rem;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+            padding-left: 3rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3rem;
+            top: 0.5rem;
+            width: 16px;
+            height: 16px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+            z-index: 2;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -3.5rem;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            background: rgba(99, 102, 241, 0.2);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-date {
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .timeline-content {
+            background: var(--card);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            background: var(--card-hover);
+            transform: translateX(10px);
+        }
+
+        .timeline-content h3 {
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .timeline-content h4 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        /* Enhanced Publications */
+        .publication-item {
+            background: var(--card);
+            padding: 2.5rem;
+            margin: 2rem 0;
+            border-radius: 16px;
+            border-left: 4px solid var(--primary);
+            backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .publication-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+
+        .publication-item:hover::before {
+            width: 8px;
+        }
+
+        .publication-item:hover {
+            transform: translateX(15px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
+            background: var(--card-hover);
+        }
+
+        .publication-title {
+            color: var(--text);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .publication-authors {
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .publication-venue {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Enhanced Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            border-top: 1px solid var(--border);
+            margin-top: 8rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 5rem 2rem 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-section h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+            padding: 0.5rem;
+            border-radius: 10px;
+        }
+
+        .contact-item:hover {
+            color: var(--text);
+            background: rgba(99, 102, 241, 0.05);
+            transform: translateX(5px);
+        }
+
+        .contact-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 1rem;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .social-link:hover::before {
+            left: 100%;
+        }
+
+        .social-link:hover {
+            color: var(--accent);
+            background: rgba(99, 102, 241, 0.05);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.15);
+        }
+
+        /* Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+            transform-origin: left;
+            transform: scaleX(0);
+            z-index: 1001;
+            transition: transform 0.1s ease;
+        }
+
+        /* Alert System */
+        .alert {
+            position: fixed;
+            top: 120px;
+            right: 20px;
+            z-index: 2001;
+            min-width: 350px;
+            padding: 1.5rem;
+            border-radius: 16px;
+            font-weight: 500;
+            backdrop-filter: blur(20px);
+            border: 1px solid;
+            animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow);
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .alert-error {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Lecturer Info Form */
+        .lecturer-info-form {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            backdrop-filter: blur(20px);
+        }
+
+        .lecturer-info-form h3 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--text);
+            text-align: center;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+            z-index: 100;
+            opacity: 0;
+            transform: translateY(20px) scale(0.8);
+        }
+
+        .fab:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+            
+            .upload-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+
+            .footer-container {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .auth-section {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .hero {
+                min-height: 100vh;
+                padding-top: 5rem;
+            }
+
+            .hero-content {
+                padding: 1rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .cta-primary, .cta-secondary {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .section {
+                padding: 5rem 1rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .timeline {
+                padding-left: 2rem;
+            }
+
+            .timeline::before {
+                left: 1rem;
+            }
+
+            .timeline-item {
+                padding-left: 2rem;
+            }
+
+            .timeline-item::before {
+                left: -2rem;
+            }
+
+            .timeline-item::after {
+                left: -2.5rem;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                padding: 4rem 1rem 2rem;
+                gap: 3rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+                padding: 2rem;
+                max-height: 80vh;
+            }
+
+            .alert {
+                right: 10px;
+                left: 10px;
+                min-width: auto;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .upload-area {
+                padding: 3rem 1.5rem;
+            }
+
+            .upload-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .section-description {
+                font-size: 1rem;
+            }
+
+            .fab {
+                bottom: 1rem;
+                right: 1rem;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .lecturer-name {
+                font-size: 2rem;
+            }
+
+            .lecturer-title {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Advanced Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger animation delays */
+        .fade-in:nth-child(1) { transition-delay: 0.1s; }
+        .fade-in:nth-child(2) { transition-delay: 0.2s; }
+        .fade-in:nth-child(3) { transition-delay: 0.3s; }
+        .fade-in:nth-child(4) { transition-delay: 0.4s; }
+        .fade-in:nth-child(5) { transition-delay: 0.5s; }
+
+        /* Loading States */
+        .loading {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            100% { left: 100%; }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--secondary), var(--accent));
+        }
+
+        /* Lecturer Mode Indicator */
+        .lecturer-mode-indicator {
+            position: fixed;
+            top: 100px;
+            left: 20px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--success);
+            color: var(--success);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            z-index: 1001;
+            display: none;
+            animation: slideInLeft 0.3s ease;
+        }
+
+        .lecturer-mode-indicator.show {
+            display: block;
+        }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+    <div class="floating-orbs">
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+    </div>
+    <div class="scroll-progress" id="scroll-progress"></div>
+    <div class="lecturer-mode-indicator" id="lecturer-indicator">
+        🔓 Lecturer Mode Active
+    </div>
+
+    <!-- Enhanced Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeLoginModal()">&times;</button>
+            <h2>🎓 Lecturer Access</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" class="form-input" required placeholder="Enter your username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-input" required placeholder="Enter your password">
+                </div>
+                <button type="submit" class="btn" style="width: 100%; padding: 1rem;">
+                    Login to Portfolio
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Enhanced Navigation with Mobile Support -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">✨ Dr. Worlarli</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#travels">Travels</a></li>
+                <li><a href="#achievements">Awards</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#teaching">Teaching</a></li>
+            </ul>
+            <div class="auth-section">
+                <span id="login-status" class="login-status" style="display: none; color: var(--success); font-weight: 600;">👤 Lecturer Mode</span>
+                <button id="login-toggle" class="btn" onclick="openLoginModal()">Lecturer Login</button>
+                <button id="logout-btn" class="btn" style="display: none;" onclick="logout()">Logout</button>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobile-menu">
+            <ul class="mobile-nav-links">
+                <li><a href="#home" onclick="closeMobileMenu()">🏠 Home</a></li>
+                <li><a href="#about" onclick="closeMobileMenu()">👤 About</a></li>
+                <li><a href="#experience" onclick="closeMobileMenu()">💼 Experience</a></li>
+                <li><a href="#publications" onclick="closeMobileMenu()">📚 Publications</a></li>
+                <li><a href="#travels" onclick="closeMobileMenu()">🌍 Travels</a></li>
+                <li><a href="#achievements" onclick="closeMobileMenu()">🏆 Awards</a></li>
+                <li><a href="#research" onclick="closeMobileMenu()">🔬 Research</a></li>
+                <li><a href="#teaching" onclick="closeMobileMenu()">👨‍🏫 Teaching</a></li>
+            </ul>
+            <div class="mobile-auth">
+                <span id="mobile-login-status" style="display: none; color: var(--success); font-weight: 600; margin-bottom: 1rem; display: block;">👤 Lecturer Mode Active</span>
+                <button id="mobile-login-toggle" class="btn" onclick="openLoginModal(); closeMobileMenu();" style="width: 100%; margin-bottom: 1rem;">Lecturer Login</button>
+                <button id="mobile-logout-btn" class="btn" style="display: none; width: 100%;" onclick="logout(); closeMobileMenu();">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Revolutionary Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-particles" id="hero-particles"></div>
+        <div class="hero-content">
+                <div class="hero-badge"> </div>
+          <h1>Academic Portfolio Platform For Dr. Worlarli Ametepe</h1>
+        <div class="hero-subtitle">Showcasing Excellence in Research & Education</div>
+     
+                    
+            <!-- Enhanced Lecturer Preview Card - BOLD and PROMINENT -->
+            <div class="lecturer-preview" id="lecturer-preview">
+                <div class="lecturer-avatar" id="lecturer-avatar">👨‍🎓</div>
+                <div class="lecturer-details">
+                    <div class="lecturer-name" id="lecturer-name">Dr. [Your Name]</div>
+                    <div class="lecturer-title" id="lecturer-title">Senior Research Fellow & Educator</div>
+                    <div class="lecturer-specialization" id="lecturer-specialization">
+                        Welcome to my academic portfolio. I specialize in cutting-edge research that bridges theory and practical application. My work focuses on innovative educational methodologies and transformative learning experiences that prepare students for tomorrow's challenges. For lecturers: login to customize and manage your content.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-cta">
+                <a href="#about" class="cta-primary">
+                    🚀 Explore Portfolio
+                </a>
+                <button class="cta-secondary lecturer-only" id="customize-btn" onclick="openLecturerForm()">
+                    ⚡ Customize Profile
+                </button>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div style="margin-bottom: 0.5rem;"></div>
+            <div style="font-size: 1.5rem;"></div>
+        </div>
+    </section>
+
+    <!-- Lecturer Customization Modal - PRIVATE ACCESS ONLY -->
+    <div id="lecturer-modal" class="modal">
+        <div class="modal-content" style="max-width: 700px;">
+            <button class="close-btn" onclick="closeLecturerModal()">&times;</button>
+            <h2>✨ Customize Your Profile</h2>
+            <div class="lecturer-info-form">
+                <div class="form-grid">
+
+                    <div class="form-group" style="grid-column: 1 / -1;">
+    <label for="prof-picture">Profile Picture</label>
+    <div class="upload-area" onclick="document.getElementById('prof-picture').click()" style="padding: 2rem; margin-bottom: 1rem;">
+        <div class="upload-icon">📸</div>
+        <h3>Upload Profile Picture</h3>
+        <p>Click to select your professional photo</p>
+        <input type="file" id="prof-picture" style="display: none;" accept="image/*">
+    </div>
+    <div id="picture-preview" style="text-align: center; margin-top: 1rem; display: none;">
+        <img id="preview-img" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary);">
+    </div>
+
+    <button type="button" onclick="removeProfilePicture()" style="background: var(--error); color: white; border: none; padding: 0.5rem 1rem; border-radius: 8px; margin-top: 0.5rem; cursor: pointer;">Remove Picture</button>
+</div>
+
+                    <div class="form-group">
+                        <label for="prof-name">Full Name</label>
+                        <input type="text" id="prof-name" class="form-input" placeholder="Dr. Jane Smith">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="prof-title">Academic Title</label>
+                        <input type="text" id="prof-title" class="form-input" placeholder="Professor of Computer Science">
+                    </div>
+                    <div class="form-group">
+                        <label for="prof-institution">Institution</label>
+                        <input type="text" id="prof-institution" class="form-input" placeholder="Harvard University">
+                    </div>
+                    <div class="form-group">
+                        <label for="prof-department">Department</label>
+                        <input type="text" id="prof-department" class="form-input" placeholder="Computer Science Department">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="prof-specialization">Research Specialization & Bio</label>
+                    <textarea id="prof-specialization" class="textarea-input" placeholder="Describe your research interests, teaching philosophy, and what makes your academic work unique. This will be displayed prominently on your homepage to give visitors an immediate sense of your expertise and passion."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="prof-achievement">Notable Achievement/Quote</label>
+                    <input type="text" id="prof-achievement" class="form-input" placeholder="Winner of Nobel Prize in Education 2024 / 'Education is the most powerful weapon...'">
+                </div>
+                <button class="btn" onclick="saveLecturerInfo()" style="width: 100%; padding: 1rem;">
+                    🎯 Update Profile
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced About Section -->
+    <section id="about" class="section">
+        <div class="section-header fade-in">
+            <div class="section-badge">🎯 About</div>
+            <h2 class="section-title">Academic Journey</h2>
+            <p class="section-description">Discover the passion, expertise, and dedication that drives educational excellence</p>
+        </div>
+
+        <div class="about-grid fade-in">
+            <div class="profile-card glass">
+                <div class="profile-image">👨‍🎓</div>
+                <div class="expertise-tags" id="expertise-tags">
+                    <span class="expertise-tag">Information System Design</span>
+                    <span class="expertise-tag">Educational Technology</span>
+                    <span class="expertise-tag">Cloud Secops </span>
+                    <span class="expertise-tag">Global Education</span>
+                </div>
+            </div>
+            <div class="about-content">
+                <div class="about-text" id="about-text">
+                    <p>Welcome to my comprehensive digital portfolio, where academic excellence meets innovation. As a passionate educator and researcher, I believe in the transformative power of knowledge and the importance of sharing discoveries with the world.</p>
+                    <p>My journey spans across multiple continents, diverse research projects, and countless interactions with brilliant minds. Through this platform, I share not just my academic work, but the complete story of my professional and personal growth.</p>
+                    <p>Join me as we explore the intersection of technology, education, and human curiosity. Together, we can shape the future of learning and make a lasting impact on the world.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enhanced Stats -->
+        <div class="stats-container glass fade-in">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number" id="publications-count">25</span>
+                    <span class="stat-label">Publications</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="countries-count">12</span>
+                    <span class="stat-label">Countries Visited</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="students-count">500B+</span>
+                    <span class="stat-label">Students Taught</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="projects-count">35</span>
+                    <span class="stat-label">Research Projects</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bio Update Section - LECTURER ONLY -->
+        <div class="upload-controls" id="bio-upload">
+            <div class="text-editor">
+                <h3>📝 Update Biography</h3>
+                <div class="editor-toolbar">
+                    <button class="editor-btn" onclick="addToTextArea('bio-text', '**Bold Text**')">Bold</button>
+                    <button class="editor-btn" onclick="addToTextArea('bio-text', '*Italic Text*')">Italic</button>
+                    <button class="editor-btn" onclick="addToTextArea('bio-text', '### Heading')">Heading</button>
+                    <button class="editor-btn" onclick="addToTextArea('bio-text', '- List item')">List</button>
+                </div>
+                <textarea id="bio-text" class="textarea-input" placeholder="Share your academic story, research passion, teaching philosophy, and what drives your work. This content will replace the default about text."></textarea>
+                <button class="btn" onclick="saveBio()">💾 Save Biography</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Experience Section -->
+    <section id="experience" class="section">
+        <div class="section-header fade-in">
+            <div class="section-badge">💼 Experience</div>
+            <h2 class="section-title">Professional Journey</h2>
+            <p class="section-description">A timeline of academic growth, leadership, and innovation</p>
+        </div>
+        
+        <!-- Experience Upload - LECTURER ONLY -->
+        <div class="upload-controls" id="experience-upload">
+            <div class="text-editor">
+                <h3>➕ Add Professional Experience</h3>
+                <div class="form-grid">
+                    <input type="text" id="exp-title" class="text-input" placeholder="Position Title">
+                    <input type="text" id="exp-company" class="text-input" placeholder="Institution/Company">
+                    <input type="text" id="exp-date" class="text-input" placeholder="Date Range (2020-2023)">
+                    <input type="text" id="exp-location" class="text-input" placeholder="Location (Optional)">
+                </div>
+                <textarea id="exp-description" class="textarea-input" placeholder="Describe your role, key responsibilities, achievements, and impact. What made this position significant in your career?"></textarea>
+                <button class="btn" onclick="addExperience()">🚀 Add Experience</button>
+            </div>
+        </div>
+
+        <div class="timeline fade-in" id="experience-timeline">
+            <!-- Sample Experience -->
+            <div class="timeline-item">
+                <div class="timeline-date">2020 - Present</div>
+                <div class="timeline-content">
+                    <h3>Senior Research Fellow</h3>
+                    <h4>University of Technology</h4>
+                    <p>Leading cutting-edge research in artificial intelligence and machine learning applications in education. Supervising doctoral students and collaborating with international research teams to develop next-generation learning systems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Publications Section -->
+    <section id="publications" class="section">
+        <div class="section-header fade-in">
+            <div class="section-badge">📚 Publications</div>
+            <h2 class="section-title">Research Contributions</h2>
+            <p class="section-description">Peer-reviewed publications advancing the frontiers of knowledge</p>
+        </div>
+        
+        <!-- Publications Upload - LECTURER ONLY -->
+        <div class="upload-controls" id="publications-upload">
+            <div class="text-editor">
+                <h3>📖 Add Publication</h3>
+                <div class="form-grid">
+                    <input type="text" id="pub-title" class="text-input" placeholder="Publication Title">
+                    <input type="text" id="pub-authors" class="text-input" placeholder="Authors (Smith, J., Doe, A.)">
+                    <input type="text" id="pub-venue" class="text-input" placeholder="Journal/Conference">
+                    <input type="text" id="pub-year" class="text-input" placeholder="Year">
+                </div>
+                <textarea id="pub-abstract" class="textarea-input" placeholder="Abstract or description of the research contribution..."></textarea>
+                <button class="btn" onclick="addPublication()">📝 Add Publication</button>
+            </div>
+        </div>
+
+        <div class="content-card glass fade-in" id="publications-list">
+            <div class="publication-item">
+                <div class="publication-title">Advanced Machine Learning Techniques in Educational Technology</div>
+                <div class="publication-authors">Dr. Academia, J. Smith, M. Johnson</div>
+                <div class="publication-venue">Journal of Educational Technology Research, 2023</div>
+            </div>
+            <div class="publication-item">
+                <div class="publication-title">Innovative Approaches to Digital Learning Environments</div>
+                <div class="publication-authors">Dr. Academia, K. Williams</div>
+                <div class="publication-venue">International Conference on Education Innovation, 2022</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Travels Section -->
+    <section id="travels" class="section">
+        <div class="section-header fade-in">
+            <div class="section-badge">🌍 Travels</div>
+            <h2 class="section-title">Global Academic Journey</h2>
+            <p class="section-description">Conferences, collaborations, and cultural exchanges around the world</p>
+        </div>
+        
+        <!-- Travels Upload - LECTURER ONLY -->
+        <div class="upload-controls" id="travels-upload">
+            <div class="upload-grid">
+                <div class="upload-area" onclick="document.getElementById('travel-images').click()">
+                    <div class="upload-icon">🌍</div>
+                    <h3>Upload Travel Photos</h3>
+                    <p>Share your conference experiences and academic journeys</p>
+                    <input type="file" id="travel-images" style="display: none;" accept="image/*" multiple>
+                </div>
+                <div class="text-editor">
+                    <h3>✈️ Add Travel Experience</h3>
+                    <div class="form-grid"secret.txt>
+                        <input type="text" id="travel-location" class="text-input" placeholder="Location/Country">
+                        <input type="text" id="travel-purpose" class="text-input" placeholder="Purpose (Conference, Research)">
+                        <input type="text" id="travel-date" class="text-input" placeholder="Date">
+                    </div>
+                    <textarea id="travel-description" class="textarea-input" placeholder="Describe your experience, insights gained, connections made, and impact on your work..."></textarea>
+                    <button class="btn" onclick="addTravelExperience()">🌟 Add Experience</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-grid fade-in" id="travels-grid">
+            <div class="content-item glass-hover">
+                <div style="height: 220px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; color: white;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🗼</div>
+                    <div style="font-size: 1.2rem; font-weight: 600;">Paris, France</div>
+                    <div style="font-size: 0.9rem; opacity: 0.9;">AI in Education Summit</div>
+                </div>
+                <div class="content-info">
+                    <h3>International AI Conference</h3>
+                    <p>Presented groundbreaking research on adaptive learning systems. Connected with leading researchers from 15 countries and established collaborative partnerships for future projects.</p>
+                    <div class="content-meta">
+                        <span class="content-date">March 2023</span>
+                        <button class="delete-btn" onclick="deleteContent(this)">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Achievements Section -->
+    <section id="achievements" class="section">
+        <div class="section-header fade-in">
+            <div class="section-badge">🏆 Achievements</div>
+            <h2 class="section-title">Awards & Recognition</h2>
+            <p class="section-description">Celebrating excellence in research, teaching, and academic leadership</p>
+        </div>
+        
+        <!-- Achievements Upload - LECTURER ONLY -->
+        <div class="upload-controls" id="achievements-upload">
+            <div class="upload-grid">
+                <div class="upload-area" onclick="document.getElementById('achievement-images').click()">
+                    <div class="upload-icon">🏆</div>
+                    <h3>Upload Achievement Photos</h3>
+                    <p>Share your awards, certificates, and moments of recognition</p>
+                    <input type="file" id="achievement-images" style="display: none;" accept="image/*" multiple>
+                </div>
+                <div class="text-editor">
+                    <h3>🎖️ Add Achievement</h3>
+                    <div class="form-grid">
+                        <input type="text" id="achievement-title" class="text-input" placeholder="Award/Achievement Title">
+                        <input type="text" id="achievement-organization" class="text-input" placeholder="Awarding Organization">
+                        <input type="text" id="achievement-date" class="text-input" placeholder="Date Received">
+                    </div>
+                    <textarea id="achievement-description" class="textarea-input" placeholder="Describe the achievement, its significance, and the impact it had on your career..."></textarea>
+                    <button class="btn" onclick="addAchievement()">⭐ Add Achievement</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-grid fade-in" id="achievements-grid">
+            <div class="content-item glass-hover">
+                <div style="height: 220px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; color: white;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🏆</div>
+                    <div style="font-size: 1.2rem; font-weight: 600; text-align: center; padding: 0 1rem;">Excellence in Research</div>
+                </div>
+                <div class="content-info">
+                    <h3>Research Innovation Award</h3>
+                    <p><strong>International Education Foundation</strong><br>Recognized for outstanding contributions to educational technology research and implementation of innovative learning solutions that have impacted thousands of students worldwide.</p>
+                    <div class="content-meta">
+                        <span class="content-date">December 2022</span>
+                        <button class="delete-btn" onclick="deleteContent(this)">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Research Section -->
+    <section id="research" class="section">
+        <div class="section-header fade-in">
+            <div class="section-badge">🔬 Research</div>
+            <h2 class="section-title">Current Research</h2>
+            <p class="section-description">Pushing the boundaries of knowledge through innovative investigation</p>
+        </div>
+        
+        <!-- Research Upload - LECTURER ONLY -->
+        <div class="upload-controls" id="research-upload">
+            <div class="text-editor">
+                <h3>🧪 Add Research Project</h3>
+                <div class="form-grid">
+                    <input type="text" id="research-title" class="text-input" placeholder="Project Title">
+                    <input type="text" id="research-status" class="text-input" placeholder="Status (Ongoing/Completed)">
+                    <input type="text" id="research-funding" class="text-input" placeholder="Funding Source (Optional)">
+                    <input type="text" id="research-collaborators" class="text-input" placeholder="Collaborators/Team">
+                </div>
+                <textarea id="research-description" class="textarea-input" placeholder="Describe the research objectives, methodology, current findings, and potential impact..."></textarea>
+                <button class="btn" onclick="addResearchProject()">🔬 Add Project</button>
+            </div>
+        </div>
+
+        <div class="content-grid fade-in" id="research-grid">
+            <div class="content-item glass-hover">
+                <div style="height: 220px; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">🧠</div>
+                <div class="content-info">
+                    <h3>Adaptive Learning Systems</h3>
+                    <p><strong>Status:</strong> Ongoing<br>
+                    <strong>Funding:</strong> NSF Grant #2023-AI-EDU<br>
+                    Developing AI-powered personalized learning platforms that adapt to individual student needs and learning patterns. Currently in Phase 2 of implementation with promising preliminary results.</p>
+                    <div class="content-meta">
+                        <span class="content-date">2023 - Present</span>
+                        <button class="delete-btn" onclick="deleteContent(this)">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Teaching Section -->
+    <section id="teaching" class="section">
+        <div class="section-header fade-in">
+            <div class="section-badge">👨‍🏫 Teaching</div>
+            <h2 class="section-title">Courses & Education</h2>
+            <p class="section-description">Inspiring the next generation through innovative pedagogy</p>
+        </div>
+        
+        <!-- Teaching Upload - LECTURER ONLY -->
+        <div class="upload-controls" id="teaching-upload">
+            <div class="text-editor">
+                <h3>📖 Add Course</h3>
+                <div class="form-grid">
+                    <input type="text" id="course-title" class="text-input" placeholder="Course Title">
+                    <input type="text" id="course-code" class="text-input" placeholder="Course Code">
+                    <input type="text" id="course-level" class="text-input" placeholder="Level (Undergraduate/Graduate)">
+                    <input type="text" id="course-semester" class="text-input" placeholder="Semester/Year">
+                    <input type="text" id="course-enrollment" class="text-input" placeholder="Enrollment (Optional)">
+                </div>
+                <textarea id="course-description" class="textarea-input" placeholder="Course description, learning objectives, innovative teaching methods, and student outcomes..."></textarea>
+                <button class="btn" onclick="addCourse()">📚 Add Course</button>
+            </div>
+        </div>
+
+        <div class="content-grid fade-in" id="teaching-grid">
+            <div class="content-item glass-hover">
+                <div style="height: 220px; background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">📚</div>
+                <div class="content-info">
+                    <h3>Advanced Data Structures</h3>
+                    <p><strong>CS 401</strong> - Graduate Level | Spring 2024 | 45 Students<br>
+                    Comprehensive study of advanced data structures including trees, graphs, and hash tables with hands-on implementation projects and real-world applications.</p>
+                    <div class="content-meta">
+                        <span class="content-date">Spring 2024</span>
+                        <button class="delete-btn" onclick="deleteContent(this)">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Media Section -->
+    <section id="media" class="section">
+        <div class="section-header fade-in">
+            <div class="section-badge">🎥 Media</div>
+            <h2 class="section-title">Media Gallery</h2>
+            <p class="section-description">Videos, presentations, and visual documentation of academic work</p>
+        </div>
+        
+        <!-- Media Upload - LECTURER ONLY -->
+        <div class="upload-controls" id="media-upload">
+            <div class="upload-area" onclick="document.getElementById('media-files').click()">
+                <div class="upload-icon">🎬</div>
+                <h3>Upload Media Files</h3>
+                <p>Add videos, presentations, images, and documents to showcase your work</p>
+                <input type="file" id="media-files" style="display: none;" accept="image/*,video/*,.pdf,.ppt,.pptx,.doc,.docx" multiple>
+            </div>
+        </div>
+
+        <div class="content-grid fade-in" id="media-grid">
+            <div class="content-item glass-hover">
+                <div style="height: 220px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; color: white;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">▶️</div>
+                    <div style="font-size: 1.1rem; font-weight: 600;">Lecture Series</div>
+                </div>
+                <div class="content-info">
+                    <h3>Introduction to Machine Learning</h3>
+                    <p>Comprehensive lecture series covering fundamental concepts, practical applications, and hands-on implementation in machine learning for educational purposes.</p>
+                    <div class="content-meta">
+                        <span class="content-date">January 2024</span>
+                        <button class="delete-btn" onclick="deleteContent(this)">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Contact Information -->
+            <div class="footer-section fade-in">
+                <h3>📞 Contact Information</h3>
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <span>brightnickson63@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <span>+233 (54) 411-2611</span>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🏢</div>
+                    <span>Room 301, Science Building<br>University of Technology</span>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <span>123 Academic Ave, Tech City, TC 12345</span>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-section fade-in">
+                <h3>🔗 Quick Navigation</h3>
+                <ul class="footer-links" style="list-style: none;">
+                    <li><a href="#about" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 0.8rem; transition: color 0.3s ease;">About Me</a></li>
+                    <li><a href="#publications" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 0.8rem; transition: color 0.3s ease;">Publications</a></li>
+                    <li><a href="#research" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 0.8rem; transition: color 0.3s ease;">Research</a></li>
+                    <li><a href="#teaching" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 0.8rem; transition: color 0.3s ease;">Teaching</a></li>
+                    <li><a href="#travels" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 0.8rem; transition: color 0.3s ease;">Travels</a></li>
+                    <li><a href="#achievements" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 0.8rem; transition: color 0.3s ease;">Achievements</a></li>
+                </ul>
+            </div>
+
+            <!-- Social Media -->
+            <div class="footer-section fade-in">
+                <h3>🌐 Connect With Me</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link">
+                        <div class="contact-icon">💼</div>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="#" class="social-link">
+                        <div class="contact-icon">🎓</div>
+                        <span>Google Scholar</span>
+                    </a>
+                    <a href="#" class="social-link">
+                        <div class="contact-icon">🔬</div>
+                        <span>ResearchGate</span>
+                    </a>
+                    <a href="#" class="social-link">
+                        <div class="contact-icon">🆔</div>
+                        <span>ORCID</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Office Hours -->
+            <div class="footer-section fade-in">
+                <h3>⏰ Office Hours</h3>
+                <div style="color: var(--text-muted); line-height: 1.8;">
+                    <div style="margin-bottom: 1.5rem; padding: 1rem; background: var(--card); border-radius: 10px; border-left: 3px solid var(--primary);">
+                        <strong style="color: var(--text);">Monday - Wednesday:</strong><br>
+                        10:00 AM - 12:00 PM<br>
+                        2:00 PM - 4:00 PM
+                    </div>
+                    <div style="margin-bottom: 1.5rem; padding: 1rem; background: var(--card); border-radius: 10px; border-left: 3px solid var(--secondary);">
+                        <strong style="color: var(--text);">Friday:</strong><br>
+                        9:00 AM - 11:00 AM<br>
+                        <em>(By appointment only)</em>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div style="border-top: 1px solid var(--border); background: rgba(10, 10, 26, 0.8); padding: 2rem;">
+            <div style="max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem;">
+                <div style="color: var(--text-muted);">
+                    <p>&copy; 2024 Dr. Ametepe Xorlarli. All rights reserved.</p>
+                    <p>Last updated: <span id="last-updated"></span></p>
+                </div>
+                <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                    <a href="#" onclick="showPrivacyPolicy()" style="color: var(--text-muted); text-decoration: none; transition: color 0.3s ease;">Privacy Policy</a>
+                    <a href="#" onclick="showTermsOfService()" style="color: var(--text-muted); text-decoration: none; transition: color 0.3s ease;">Terms of Service</a>
+                    <a href="#" onclick="showAccessibility()" style="color: var(--text-muted); text-decoration: none; transition: color 0.3s ease;">Accessibility</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <button class="fab" onclick="scrollToTop()" title="Back to Top">
+        ↑
+    </button>
+
+    <script>
+        // Enhanced Authentication with Private Access Control
+        let isAuthenticated = false;
+        const correctUsername = "lecturer";
+        const correctPassword = "Hackitifyoucan";
+
+        // Mobile Menu Functions
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('open');
+            document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : 'auto';
+        }
+
+        function closeMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Create floating particles
+        function createParticles() {
+            const container = document.getElementById('hero-particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Enhanced Login with Security
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+            if (username === correctUsername && password === correctPassword) {
+                isAuthenticated = true;
+                updateAuthenticationUI(true);
+                closeLoginModal();
+                showAlert('🎉 Successfully logged in! You can now manage your portfolio.', 'success');
+            } else {
+                showAlert('❌ Invalid credentials. Please try again.', 'error');
+                // Clear form for security
+                document.getElementById('username').value = '';
+                document.getElementById('password').value = '';
+            }
+        });
+
+        function updateAuthenticationUI(authenticated) {
+            // Update main navigation
+            document.getElementById('login-status').style.display = authenticated ? 'inline' : 'none';
+            document.getElementById('login-toggle').style.display = authenticated ? 'none' : 'inline';
+            document.getElementById('logout-btn').style.display = authenticated ? 'inline' : 'none';
+            
+            // Update mobile navigation
+            document.getElementById('mobile-login-status').style.display = authenticated ? 'block' : 'none';
+            document.getElementById('mobile-login-toggle').style.display = authenticated ? 'none' : 'block';
+            document.getElementById('mobile-logout-btn').style.display = authenticated ? 'block' : 'none';
+            
+            // Show/hide customization button in hero
+            const customizeBtn = document.getElementById('customize-btn');
+            if (authenticated) {
+                customizeBtn.classList.add('authenticated');
+            } else {
+                customizeBtn.classList.remove('authenticated');
+            }
+            
+            // Show/hide all upload controls
+            document.querySelectorAll('.upload-controls').forEach(el => {
+                if (authenticated) {
+                    el.classList.add('authenticated');
+                } else {
+                    el.classList.remove('authenticated');
+                }
+            });
+            
+            // Show/hide lecturer mode indicator
+            const indicator = document.getElementById('lecturer-indicator');
+            if (authenticated) {
+                indicator.classList.add('show');
+            } else {
+                indicator.classList.remove('show');
+            }
+            
+            // Show/hide delete buttons
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.style.display = authenticated ? 'block' : 'none';
+            });
+        }
+
+        function openLoginModal() {
+            document.getElementById('login-modal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            closeMobileMenu();
+        }
+
+        function closeLoginModal() {
+            document.getElementById('login-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            document.getElementById('login-form').reset();
+        }
+
+        function logout() {
+            isAuthenticated = false;
+            updateAuthenticationUI(false);
+            showAlert('👋 Logged out successfully! All customization features are now private.', 'success');
+        }
+
+        // Lecturer Profile Customization - PRIVATE ACCESS
+        function openLecturerForm() {
+            if (!isAuthenticated) {
+                showAlert('🔒 Please login as a lecturer to customize your profile', 'error');
+                openLoginModal();
+                return;
+            }
+            document.getElementById('lecturer-modal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLecturerModal() {
+            document.getElementById('lecturer-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function saveLecturerInfo() {
+            if (!isAuthenticated) {
+                showAlert('🔒 Authentication required to save profile', 'error');
+                return;
+            }
+            
+            const name = document.getElementById('prof-name').value.trim();
+            const title = document.getElementById('prof-title').value.trim();
+            const institution = document.getElementById('prof-institution').value.trim();
+            const department = document.getElementById('prof-department').value.trim();
+            const specialization = document.getElementById('prof-specialization').value.trim();
+            const achievement = document.getElementById('prof-achievement').value.trim();
+            
+            if (name) document.getElementById('lecturer-name').textContent = name;
+            if (title) {
+                const fullTitle = institution ? `${title} at ${institution}` : title;
+                document.getElementById('lecturer-title').textContent = fullTitle;
+            }
+            if (specialization) {
+                document.getElementById('lecturer-specialization').textContent = specialization;
+            }
+            
+            // Update the about section if content provided
+            if (specialization) {
+                const aboutText = document.getElementById('about-text');
+                aboutText.innerHTML = `<p>${specialization}</p>`;
+                if (achievement) {
+                    aboutText.innerHTML += `<p style="margin-top: 1.5rem; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px; border-left: 3px solid var(--primary);"><strong>Notable:</strong> ${achievement}</p>`;
+                }
+            }
+
+            // Update profile picture if uploaded
+            if (window.tempProfilePicture) {
+                const imageDataUrl = window.tempProfilePicture;
+                
+                // Save to localStorage for persistence
+                localStorage.setItem('profilePicture', imageDataUrl);
+                
+                // Update all avatar instances
+                updateProfilePicture(imageDataUrl);
+                
+                // Clear the temp storage
+                delete window.tempProfilePicture;
+            }
+
+            // Update profile picture preview
+               function updateProfilePicture(imageDataUrl) {
+                    // Update lecturer avatar in hero section
+                    const lecturerAvatar = document.getElementById('lecturer-avatar');
+                    lecturerAvatar.innerHTML = `<img src="${imageDataUrl}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+                    
+                    // Update profile image in about section
+                    const profileImage = document.querySelector('.profile-image');
+                    if (profileImage) {
+                        profileImage.innerHTML = `<img src="${imageDataUrl}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+                    }
+                } 
+            // Show success message                
+            closeLecturerModal();
+            showAlert('✨ Profile updated successfully!', 'success');
+            
+            // Clear form
+            ['prof-name', 'prof-title', 'prof-institution', 'prof-department', 'prof-specialization', 'prof-achievement' , 'prof-picture'].forEach(id => {
+                document.getElementById(id).value = '';
+            });
+
+            // Hide picture preview
+            document.getElementById('picture-preview').style.display = 'none';
+
+        }
+
+        // Enhanced Content Management - ALL PRIVATE
+        function addExperience() {
+            if (!isAuthenticated) {
+                showAlert('🔒 Please login to add content', 'error');
+                return;
+            }
+            
+            const title = document.getElementById('exp-title').value.trim();
+            const company = document.getElementById('exp-company').value.trim();
+            const date = document.getElementById('exp-date').value.trim();
+            const location = document.getElementById('exp-location').value.trim();
+            const description = document.getElementById('exp-description').value.trim();
+            
+            if (!title || !company || !date || !description) {
+                showAlert('⚠️ Please fill all required fields', 'error');
+                return;
+            }
+            
+            const timeline = document.getElementById('experience-timeline');
+            const item = document.createElement('div');
+            item.className = 'timeline-item';
+            item.innerHTML = `
+                <div class="timeline-date">${date}</div>
+                <div class="timeline-content">
+                    <h3>${title}</h3>
+                    <h4>${company}${location ? ` • ${location}` : ''}</h4>
+                    <p>${description}</p>
+                    <button class="delete-btn" onclick="deleteContent(this)" style="margin-top: 1rem; opacity: 1;">Delete</button>
+                </div>
+            `;
+            
+            timeline.appendChild(item);
+            
+            // Clear form
+            ['exp-title', 'exp-company', 'exp-date', 'exp-location', 'exp-description'].forEach(id => {
+                document.getElementById(id).value = '';
+            });
+            
+            showAlert('✅ Experience added successfully!', 'success');
+        }
+
+        function addPublication() {
+            if (!isAuthenticated) {
+                showAlert('🔒 Please login to add content', 'error');
+                return;
+            }
+            
+            const title = document.getElementById('pub-title').value.trim();
+            const authors = document.getElementById('pub-authors').value.trim();
+            const venue = document.getElementById('pub-venue').value.trim();
+            const year = document.getElementById('pub-year').value.trim();
+            const abstract = document.getElementById('pub-abstract').value.trim();
+            
+            if (!title || !authors || !venue || !year) {
+                showAlert('⚠️ Please fill all required fields', 'error');
+                return;
+            }
+            
+            const list = document.getElementById('publications-list');
+            const item = document.createElement('div');
+            item.className = 'publication-item';
+            item.innerHTML = `
+                <div class="publication-title">${title}</div>
+                <div class="publication-authors">${authors}</div>
+                <div class="publication-venue">${venue}, ${year}</div>
+                ${abstract ? `<p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;">${abstract}</p>` : ''}
+                <button class="delete-btn" onclick="deleteContent(this)" style="margin-top: 1rem; opacity: 1;">Delete</button>
+            `;
+            
+            list.appendChild(item);
+            
+            // Clear form
+            ['pub-title', 'pub-authors', 'pub-venue', 'pub-year', 'pub-abstract'].forEach(id => {
+                document.getElementById(id).value = '';
+            });
+            
+            showAlert('📚 Publication added successfully!', 'success');
+            updateStats();
+        }
+
+        function addTravelExperience() {
+            if (!isAuthenticated) {
+                showAlert('🔒 Please login to add content', 'error');
+                return;
+            }
+            
+            const location = document.getElementById('travel-location').value.trim();
+            const purpose = document.getElementById('travel-purpose').value.trim();
+            const date = document.getElementById('travel-date').value.trim();
+            const description = document.getElementById('travel-description').value.trim();
+            
+            if (!location || !purpose || !date || !description) {
+                showAlert('⚠️ Please fill all fields', 'error');
+                return;
+            }
+            
+            const grid = document.getElementById('travels-grid');
+            const item = document.createElement('div');
+            item.className = 'content-item glass-hover';
+            
+            // Generate random gradient for visual variety
+            const gradients = [
+                'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+                'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+                'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'
+            ];
+            const randomGradient = gradients[Math.floor(Math.random() * gradients.length)];
+            
+            item.innerHTML = `
+                <div style="height: 220px; background: ${randomGradient}; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🌍</div>
+                    <div style="font-size: 1.2rem; font-weight: 600; text-align: center; padding: 0 1rem;">${location}</div>
+                    <div style="font-size: 0.9rem; opacity: 0.9; text-align: center;">${purpose}</div>
+                </div>
+                <div class="content-info">
+                    <h3>${purpose} - ${location}</h3>
+                    <p>${description}</p>
+                    <div class="content-meta">
+                        <span class="content-date">${date}</span>
+                        <button class="delete-btn" onclick="deleteContent(this)">Delete</button>
+                    </div>
+                </div>
+            `;
+            
+            grid.appendChild(item);
+            
+            // Clear form
+            ['travel-location', 'travel-purpose', 'travel-date', 'travel-description'].forEach(id => {
+                document.getElementById(id).value = '';
+            });
+            
+            showAlert('✈️ Travel experience added successfully!', 'success');
+            updateStats();
+        }
+
+        function addAchievement() {
+            if (!isAuthenticated) {
+                showAlert('🔒 Please login to add content', 'error');
+                return;
+            }
+            
+            const title = document.getElementById('achievement-title').value.trim();
+            const organization = document.getElementById('achievement-organization').value.trim();
+            const date = document.getElementById('achievement-date').value.trim();
+            const description = document.getElementById('achievement-description').value.trim();
+            
+            if (!title || !organization || !date || !description) {
+                showAlert('⚠️ Please fill all fields', 'error');
+                return;
+            }
+            
+            const grid = document.getElementById('achievements-grid');
+            const item = document.createElement('div');
+            item.className = 'content-item glass-hover';
+            
+            const icons = ['🏆', '🥇', '⭐', '🎖️', '👑'];
+            const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+            
+            item.innerHTML = `
+                <div style="height: 220px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; color: white;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">${randomIcon}</div>
+                    <div style="font-size: 1.1rem; font-weight: 600; text-align: center; padding: 0 1rem;">${title}</div>
+                </div>
+                <div class="content-info">
+                    <h3>${title}</h3>
+                    <p><strong>${organization}</strong><br>${description}</p>
+                    <div class="content-meta">
+                        <span class="content-date">${date}</span>
+                        <button class="delete-btn" onclick="deleteContent(this)">Delete</button>
+                    </div>
+                </div>
+            `;
+            
+            grid.appendChild(item);
+            
+            // Clear form
+            ['achievement-title', 'achievement-organization', 'achievement-date', 'achievement-description'].forEach(id => {
+                document.getElementById(id).value = '';
+            });
+            
+            showAlert('🏆 Achievement added successfully!', 'success');
+        }
+
+        function addResearchProject() {
+            if (!isAuthenticated) {
+                showAlert('🔒 Please login to add content', 'error');
+                return;
+            }
+            
+            const title = document.getElementById('research-title').value.trim();
+            const status = document.getElementById('research-status').value.trim();
+            const funding = document.getElementById('research-funding').value.trim();
+            const collaborators = document.getElementById('research-collaborators').value.trim();
+            const description = document.getElementById('research-description').value.trim();
+            
+            if (!title || !status || !description) {
+                showAlert('⚠️ Please fill required fields', 'error');
+                return;
+            }
+            
+            const grid = document.getElementById('research-grid');
+            const item = document.createElement('div');
+            item.className = 'content-item glass-hover';
+            
+            const researchIcons = ['🧠', '🔬', '🧪', '📊', '🤖', '🌱'];
+            const randomIcon = researchIcons[Math.floor(Math.random() * researchIcons.length)];
+            
+            item.innerHTML = `
+                <div style="height: 220px; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">${randomIcon}</div>
+                <div class="content-info">
+                    <h3>${title}</h3>
+                    <p><strong>Status:</strong> ${status}<br>
+                    ${funding ? `<strong>Funding:</strong> ${funding}<br>` : ''}
+                    ${collaborators ? `<strong>Team:</strong> ${collaborators}<br>` : ''}
+                    ${description}</p>
+                    <div class="content-meta">
+                        <span class="content-date">${new Date().getFullYear()}</span>
+                        <button class="delete-btn" onclick="deleteContent(this)">Delete</button>
+                    </div>
+                </div>
+            `;
+            
+            grid.appendChild(item);
+            
+            // Clear form
+            ['research-title', 'research-status', 'research-funding', 'research-collaborators', 'research-description'].forEach(id => {
+                document.getElementById(id).value = '';
+            });
+            
+            showAlert('🔬 Research project added successfully!', 'success');
+            updateStats();
+        }
+
+        function addCourse() {
+            if (!isAuthenticated) {
+                showAlert('🔒 Please login to add content', 'error');
+                return;
+            }
+            
+            const title = document.getElementById('course-title').value.trim();
+            const code = document.getElementById('course-code').value.trim();
+            const level = document.getElementById('course-level').value.trim();
+            const semester = document.getElementById('course-semester').value.trim();
+            const enrollment = document.getElementById('course-enrollment').value.trim();
+            const description = document.getElementById('course-description').value.trim();
+            
+            if (!title || !code || !level || !semester || !description) {
+                showAlert('⚠️ Please fill all required fields', 'error');
+                return;
+            }
+            
+            const grid = document.getElementById('teaching-grid');
+            const item = document.createElement('div');
+            item.className = 'content-item glass-hover';
+            
+            item.innerHTML = `
+                <div style="height: 220px; background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">📚</div>
+                <div class="content-info">
+                    <h3>${title}</h3>
+                    <p><strong>${code}</strong> - ${level} Level | ${semester}${enrollment ? ` | ${enrollment} Students` : ''}<br>
+                    ${description}</p>
+                    <div class="content-meta">
+                        <span class="content-date">${semester}</span>
+                        <button class="delete-btn" onclick="deleteContent(this)">Delete</button>
+                    </div>
+                </div>
+            `;
+            
+            grid.appendChild(item);
+            
+            // Clear form
+            ['course-title', 'course-code', 'course-level', 'course-semester', 'course-enrollment', 'course-description'].forEach(id => {
+                document.getElementById(id).value = '';
+            });
+            
+            showAlert('📖 Course added successfully!', 'success');
+        }
+
+        function saveBio() {
+            if (!isAuthenticated) {
+                showAlert('🔒 Please login to save content', 'error');
+                return;
+            }
+            
+            const bioText = document.getElementById('bio-text').value.trim();
+            if (!bioText) {
+                showAlert('⚠️ Please enter some biography content', 'error');
+                return;
+            }
+            
+            const aboutText = document.getElementById('about-text');
+            const paragraphs = bioText.split('\n\n').filter(p => p.trim());
+            aboutText.innerHTML = paragraphs.map(p => `<p>${p.trim()}</p>`).join('');
+            
+            document.getElementById('bio-text').value = '';
+            showAlert('✨ Biography updated successfully!', 'success');
+        }
+
+        // Enhanced File Upload Handlers - PRIVATE ACCESS
+        document.getElementById('travel-images').addEventListener('change', function(e) {
+            if (!isAuthenticated) {
+                showAlert('🔒 Please login to upload content', 'error');
+                this.value = '';
+                return;
+            }
+            handleImageUpload(e.target.files, 'travels-grid', 'travel');
+        });
+
+        document.getElementById('achievement-images').addEventListener('change', function(e) {
+            if (!isAuthenticated) {
+                showAlert('🔒 Please login to upload content', 'error');
+                this.value = '';
+                return;
+            }
+            handleImageUpload(e.target.files, 'achievements-grid', 'achievement');
+        });
+
+        document.getElementById('media-files').addEventListener('change', function(e) {
+            if (!isAuthenticated) {
+                showAlert('🔒 Please login to upload content', 'error');
+                this.value = '';
+                return;
+            }
+            handleMediaUpload(e.target.files, 'media-grid');
+        });
+
+        // Profile Picture Upload Handler
+document.getElementById('prof-picture').addEventListener('change', function(e) {
+    if (!isAuthenticated) {
+        showAlert('🔒 Please login to upload content', 'error');
+        this.value = '';
+        return;
+    }
+    handleProfilePicture(e.target.files[0]);
+});
+
+function handleProfilePicture(file) {
+    if (!file || !file.type.startsWith('image/')) {
+        showAlert('⚠️ Please upload a valid image file', 'error');
+        return;
+    }
+    
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        window.tempProfilePicture = e.target.result; // Store temporarily
+        const preview = document.getElementById('picture-preview');
+        const previewImg = document.getElementById('preview-img');
+        
+        previewImg.src = e.target.result;
+        preview.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+}
+
+function removeProfilePicture() {
+    if (!isAuthenticated) {
+        showAlert('🔒 Please login to modify content', 'error');
+        return;
+    }
+    
+    // Clear the input
+    document.getElementById('prof-picture').value = '';
+    
+    // Hide preview
+    document.getElementById('picture-preview').style.display = 'none';
+    
+    // Clear temp storage
+    delete window.tempProfilePicture;
+    
+    // Remove from localStorage
+    localStorage.removeItem('profilePicture');
+    
+    // Reset avatars to default emoji
+    const lecturerAvatar = document.getElementById('lecturer-avatar');
+    lecturerAvatar.innerHTML = '👨‍🎓';
+    
+    const profileImage = document.querySelector('.profile-image');
+    if (profileImage) {
+        profileImage.innerHTML = '👨‍🎓';
+    }
+    
+    showAlert('🗑️ Profile picture removed successfully!', 'success');
+}
+
+function updateProfilePicture(imageDataUrl) {
+    // Update lecturer avatar in hero section
+    const lecturerAvatar = document.getElementById('lecturer-avatar');
+    lecturerAvatar.innerHTML = `<img src="${imageDataUrl}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+    
+    // Update profile image in about section
+    const profileImage = document.querySelector('.profile-image');
+    if (profileImage) {
+        profileImage.innerHTML = `<img src="${imageDataUrl}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+    }
+}
+
+// Fixed saveLecturerInfo function
+function saveLecturerInfo() {
+    if (!isAuthenticated) {
+        showAlert('🔒 Authentication required to save profile', 'error');
+        return;
+    }
+    
+    const name = document.getElementById('prof-name').value.trim();
+    const title = document.getElementById('prof-title').value.trim();
+    const institution = document.getElementById('prof-institution').value.trim();
+    const department = document.getElementById('prof-department').value.trim();
+    const specialization = document.getElementById('prof-specialization').value.trim();
+    const achievement = document.getElementById('prof-achievement').value.trim();
+    
+    if (name) document.getElementById('lecturer-name').textContent = name;
+    if (title) {
+        const fullTitle = institution ? `${title} at ${institution}` : title;
+        document.getElementById('lecturer-title').textContent = fullTitle;
+    }
+    if (specialization) {
+        document.getElementById('lecturer-specialization').textContent = specialization;
+    }
+    
+    // Update the about section if content provided
+    if (specialization) {
+        const aboutText = document.getElementById('about-text');
+        aboutText.innerHTML = `<p>${specialization}</p>`;
+        if (achievement) {
+            aboutText.innerHTML += `<p style="margin-top: 1.5rem; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 10px; border-left: 3px solid var(--primary);"><strong>Notable:</strong> ${achievement}</p>`;
+        }
+    }
+
+    // Update profile picture if uploaded
+    if (window.tempProfilePicture) {
+        const imageDataUrl = window.tempProfilePicture;
+        
+        // Save to localStorage for persistence
+        localStorage.setItem('profilePicture', imageDataUrl);
+        
+        // Update all avatar instances
+        updateProfilePicture(imageDataUrl);
+        
+        // Clear the temp storage
+        delete window.tempProfilePicture;
+    }
+                
+    // Show success message                
+    closeLecturerModal();
+    showAlert('✨ Profile updated successfully!', 'success');
+    
+    // Clear form
+    ['prof-name', 'prof-title', 'prof-institution', 'prof-department', 'prof-specialization', 'prof-achievement'].forEach(id => {
+        document.getElementById(id).value = '';
+    });
+    
+    // Clear file input
+    document.getElementById('prof-picture').value = '';
+
+    // Hide picture preview
+    document.getElementById('picture-preview').style.display = 'none';
+}
+
+        function handleImageUpload(files, gridId, type) {
+            Array.from(files).forEach((file, index) => {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        createImageItem(e.target.result, file.name, type, gridId);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            showAlert(`📸 ${files.length} image(s) uploaded successfully!`, 'success');
+        }
+
+        function handleMediaUpload(files, gridId) {
+            Array.from(files).forEach((file, index) => {
+                if (file.type.startsWith('image/') || file.type.startsWith('video/')) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        createMediaItem(e.target.result, file.name, file.type, gridId);
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    createDocumentItem(file.name, getFileType(file.name), gridId);
+                }
+            });
+            
+            showAlert(`🎬 ${files.length} file(s) uploaded successfully!`, 'success');
+        }
+
+        function createImageItem(src, name, type, gridId) {
+            const grid = document.getElementById(gridId);
+            const item = document.createElement('div');
+            item.className = 'content-item glass-hover';
+            
+            const title = name.split('.')[0].replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            
+            item.innerHTML = `
+                <img src="${src}" alt="${name}" style="width: 100%; height: 220px; object-fit: cover;">
+                <div class="content-info">
+                    <h3>${title}</h3>
+                    <p>Uploaded ${type} image • ${Math.round(src.length / 1024)} KB</p>
+                    <div class="content-meta">
+                        <span class="content-date">${new Date().toLocaleDateString()}</span>
+                        <button class="delete-btn" onclick="deleteContent(this)">Delete</button>
+                    </div>
+                </div>
+            `;
+            
+            grid.appendChild(item);
+            
+            // Animate in
+            setTimeout(() => {
+                item.style.transform = 'translateY(0)';
+                item.style.opacity = '1';
+            }, 100);
+        }
+
+        function createMediaItem(src, name, type, gridId) {
+            const grid = document.getElementById(gridId);
+            const item = document.createElement('div');
+            item.className = 'content-item glass-hover';
+            
+            const title = name.split('.')[0].replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            const mediaType = type.startsWith('video/') ? 'video' : 'image';
+            
+            const mediaElement = type.startsWith('video/') 
+                ? `<video src="${src}" controls style="width: 100%; height: 220px; object-fit: cover; border-radius: 0;"></video>`
+                : `<img src="${src}" alt="${name}" style="width: 100%; height: 220px; object-fit: cover;">`;
+
+            item.innerHTML = `
+                ${mediaElement}
+                <div class="content-info">
+                    <h3>${title}</h3>
+                    <p>Uploaded ${mediaType} file • ${Math.round(src.length / 1024)} KB</p>
+                    <div class="content-meta">
+                        <span class="content-date">${new Date().toLocaleDateString()}</span>
+                        <button class="delete-btn" onclick="deleteContent(this)">Delete</button>
+                    </div>
+                </div>
+            `;
+            
+            grid.appendChild(item);
+        }
+
+        function createDocumentItem(name, type, gridId) {
+            const grid = document.getElementById(gridId);
+            const item = document.createElement('div');
+            item.className = 'content-item glass-hover';
+            
+            const title = name.split('.')[0].replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            const icons = {
+                'PDF Document': '📄',
+                'Presentation': '📊',
+                'Word Document': '📝',
+                'Unknown': '📁'
+            };
+            
+            item.innerHTML = `
+                <div style="height: 220px; background: linear-gradient(135deg, #6366f1, #8b5cf6); display: flex; flex-direction: column; align-items: center; justify-content: center; color: white;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">${icons[type] || icons['Unknown']}</div>
+                    <div style="font-size: 1rem; font-weight: 600; text-align: center; padding: 0 1rem;">${type}</div>
+                </div>
+                <div class="content-info">
+                    <h3>${title}</h3>
+                    <p>Uploaded ${type.toLowerCase()}</p>
+                    <div class="content-meta">
+                        <span class="content-date">${new Date().toLocaleDateString()}</span>
+                        <button class="delete-btn" onclick="deleteContent(this)">Delete</button>
+                    </div>
+                </div>
+            `;
+            
+            grid.appendChild(item);
+        }
+
+        function getFileType(filename) {
+            const ext = filename.split('.').pop().toLowerCase();
+            switch(ext) {
+                case 'pdf': return 'PDF Document';
+                case 'ppt':
+                case 'pptx': return 'Presentation';
+                case 'doc':
+                case 'docx': return 'Word Document';
+                default: return 'Unknown';
+            }
+        }
+
+        function deleteContent(button) {
+            if (!isAuthenticated) {
+                showAlert('🔒 Please login to delete content', 'error');
+                return;
+            }
+            
+            if (confirm('🗑️ Are you sure you want to delete this item?')) {
+                const item = button.closest('.content-item, .timeline-item, .publication-item');
+                item.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                item.style.transform = 'scale(0.8)';
+                item.style.opacity = '0';
+                
+                setTimeout(() => {
+                    item.remove();
+                    showAlert('🗑️ Content deleted successfully!', 'success');
+                    updateStats();
+                }, 400);
+            }
+        }
+
+        function addToTextArea(textareaId, text) {
+            const textarea = document.getElementById(textareaId);
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const textBefore = textarea.value.substring(0, start);
+            const textAfter = textarea.value.substring(end);
+            
+            textarea.value = textBefore + text + textAfter;
+            textarea.selectionStart = textarea.selectionEnd = start + text.length;
+            textarea.focus();
+        }
+
+        function updateStats() {
+            const publicationCount = document.querySelectorAll('#publications-list .publication-item').length;
+            const travelCount = document.querySelectorAll('#travels-grid .content-item').length;
+            const researchCount = document.querySelectorAll('#research-grid .content-item').length;
+            
+            document.getElementById('publications-count').textContent = publicationCount;
+            document.getElementById('countries-count').textContent = Math.min(travelCount + 8, 50);
+            document.getElementById('projects-count').textContent = researchCount + 30;
+        }
+
+        // Enhanced scroll effects
+        function updateScrollProgress() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            document.getElementById('scroll-progress').style.transform = `scaleX(${scrollPercent})`;
+        }
+
+        function updateNavbar() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        }
+
+        // Enhanced intersection observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Utility functions
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.textContent = message;
+            
+            document.body.appendChild(alertDiv);
+            
+            setTimeout(() => {
+                alertDiv.style.animation = 'slideInRight 0.3s ease-out reverse';
+                setTimeout(() => alertDiv.remove(), 300);
+            }, 4000);
+        }
+
+        function showPrivacyPolicy() {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'block';
+            modal.innerHTML = `
+                <div class="modal-content" style="max-width: 700px; max-height: 80vh; overflow-y: auto;">
+                    <button class="close-btn" onclick="this.closest('.modal').remove()">&times;</button>
+                    <h2>🔒 Privacy Policy</h2>
+                    <div style="text-align: left; line-height: 1.7; color: var(--text-muted);">
+                        <p><strong>Last updated:</strong> ${new Date().toLocaleDateString()}</p>
+                        <h3 style="color: var(--text); margin: 2rem 0 1rem 0;">Information We Collect</h3>
+                        <p>We collect information you provide directly to us, such as when you contact us through our forms.</p>
+                        <h3 style="color: var(--text); margin: 2rem 0 1rem 0;">How We Use Information</h3>
+                        <p>We use the information we collect to provide, maintain, and improve our services and communicate with you about academic updates.</p>
+                        <h3 style="color: var(--text); margin: 2rem 0 1rem 0;">Information Sharing</h3>
+                        <p>We do not sell, trade, or otherwise transfer your personal information to third parties without your explicit consent.</p>
+                        <h3 style="color: var(--text); margin: 2rem 0 1rem 0;">Contact Us</h3>
+                        <p>If you have any questions about this Privacy Policy, please contact us at dr.academia@university.edu</p>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function showTermsOfService() {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'block';
+            modal.innerHTML = `
+                <div class="modal-content" style="max-width: 700px; max-height: 80vh; overflow-y: auto;">
+                    <button class="close-btn" onclick="this.closest('.modal').remove()">&times;</button>
+                    <h2>📋 Terms of Service</h2>
+                    <div style="text-align: left; line-height: 1.7; color: var(--text-muted);">
+                        <p><strong>Last updated:</strong> ${new Date().toLocaleDateString()}</p>
+                        <h3 style="color: var(--text); margin: 2rem 0 1rem 0;">Acceptance of Terms</h3>
+                        <p>By accessing and using this academic portfolio website, you accept and agree to be bound by the terms and provision of this agreement.</p>
+                        <h3 style="color: var(--text); margin: 2rem 0 1rem 0;">Use License</h3>
+                        <p>Permission is granted to temporarily access the materials on this website for personal, educational, and non-commercial purposes only.</p>
+                        <h3 style="color: var(--text); margin: 2rem 0 1rem 0;">Academic Integrity</h3>
+                        <p>All research, publications, and academic content presented here maintain the highest standards of academic integrity and ethical research practices.</p>
+                        <h3 style="color: var(--text); margin: 2rem 0 1rem 0;">Contact</h3>
+                        <p>For questions regarding these terms, please contact dr.academia@university.edu</p>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function showAccessibility() {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'block';
+            modal.innerHTML = `
+                <div class="modal-content" style="max-width: 700px; max-height: 80vh; overflow-y: auto;">
+                    <button class="close-btn" onclick="this.closest('.modal').remove()">&times;</button>
+                    <h2>♿ Accessibility Statement</h2>
+                    <div style="text-align: left; line-height: 1.7; color: var(--text-muted);">
+                        <p><strong>Last updated:</strong> ${new Date().toLocaleDateString()}</p>
+                        <h3 style="color: var(--text); margin: 2rem 0 1rem 0;">Our Commitment</h3>
+                        <p>We are committed to ensuring that our academic portfolio website is accessible to everyone, including people with disabilities.</p>
+                        <h3 style="color: var(--text); margin: 2rem 0 1rem 0;">Accessibility Features</h3>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Keyboard navigation support</li>
+                            <li>Screen reader compatibility</li>
+                            <li>High contrast design with sufficient color contrast ratios</li>
+                            <li>Scalable fonts and responsive design</li>
+                            <li>Alternative text for images and media</li>
+                            <li>Semantic HTML structure</li>
+                        </ul>
+                        <h3 style="color: var(--text); margin: 2rem 0 1rem 0;">Feedback</h3>
+                        <p>If you encounter any accessibility barriers, please contact us at dr.academia@university.edu and we will work promptly to address them.</p>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                closeMobileMenu(); // Close mobile menu if open
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 100;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Enhanced scroll listeners
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    updateScrollProgress();
+                    updateNavbar();
+                    toggleBackToTop();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+
+        // Enhanced scroll to top visibility
+        function toggleBackToTop() {
+            const fab = document.querySelector('.fab');
+            if (window.scrollY > 500) {
+                fab.style.opacity = '1';
+                fab.style.transform = 'translateY(0) scale(1)';
+            } else {
+                fab.style.opacity = '0';
+                fab.style.transform = 'translateY(20px) scale(0.8)';
+            }
+        }
+
+        window.addEventListener('scroll', onScroll);
+        window.addEventListener('resize', updateScrollProgress);
+
+        // Initialize page
+        window.addEventListener('load', () => {
+            createParticles();
+            document.body.style.opacity = '1';
+            document.getElementById('last-updated').textContent = new Date().toLocaleDateString();
+            
+             // Load saved profile picture
+            const savedProfilePicture = localStorage.getItem('profilePicture');
+            if (savedProfilePicture) {
+                updateProfilePicture(savedProfilePicture);
+            }
+
+            // Initialize authentication state
+            updateAuthenticationUI(false);
+            
+            // Initial stats animation
+            setTimeout(() => {
+                updateStats();
+            }, 1000);
+        });
+
+        // Close modals on outside click
+        window.addEventListener('click', (e) => {
+            const loginModal = document.getElementById('login-modal');
+            const lecturerModal = document.getElementById('lecturer-modal');
+            
+            if (e.target === loginModal) closeLoginModal();
+            if (e.target === lecturerModal) closeLecturerModal();
+            
+            // Close mobile menu if clicking outside
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (!e.target.closest('.mobile-menu') && !e.target.closest('.mobile-menu-btn') && mobileMenu.classList.contains('open')) {
+                closeMobileMenu();
+            }
+        });
+
+        // Enhanced keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeLoginModal();
+                closeLecturerModal();
+                closeMobileMenu();
+            }
+            
+            if ((e.ctrlKey || e.metaKey) && e.key === 'l' && !isAuthenticated) {
+                e.preventDefault();
+                openLoginModal();
+            }
+            
+            // Mobile menu toggle with keyboard
+            if ((e.ctrlKey || e.metaKey) && e.key === 'm') {
+                e.preventDefault();
+                toggleMobileMenu();
+            }
+        });
+
+        // Enhanced security - prevent unauthorized access
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hide all customization features initially
+            updateAuthenticationUI(false);
+            
+            // Prevent form submissions without authentication
+            document.querySelectorAll('form').forEach(form => {
+                if (form.id !== 'login-form') {
+                    form.addEventListener('submit', (e) => {
+                        if (!isAuthenticated) {
+                            e.preventDefault();
+                            showAlert('🔒 Authentication required', 'error');
+                        }
+                    });
+                }
+            });
+        });
+
+        // Enhanced responsive handling
+        window.addEventListener('resize', () => {
+            // Close mobile menu on desktop resize
+            if (window.innerWidth > 768) {
+                closeMobileMenu();
+            }
+            
+            // Update layout calculations
+            updateScrollProgress();
+        });
+
+        // Performance optimization
+        const debounce = (func, wait) => {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        };
+
+        // Debounced scroll handler for better performance
+        window.addEventListener('scroll', debounce(onScroll, 10));
+
+        // Console messages
+        console.log('🚀 Enhanced Academic Portfolio Loaded Successfully!');
+        console.log('✨ Features: Modern UI/UX, Glassmorphism, Advanced Animations');
+        console.log('🔑 Login: lecturer / academic2024');
+        console.log('🔒 All customization features are now PRIVATE - login required!');
+        console.log('📱 Fully responsive with mobile navigation support');
+        console.log('💡 Newsletter features removed as requested');
+        console.log('👤 Lecturer info now BOLDLY displayed on landing page');
+    </script>
+</body>
+</html>
